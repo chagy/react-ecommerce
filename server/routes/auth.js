@@ -4,19 +4,9 @@ const router = express.Router();
 
 const { authCheck }  = require("../middlewares/auth");
 
-const { createOrUpdateUser } = require("../controllers/auth");
-
-const myMiddleWare = (req,res,next) => {
-    console.log("I Am a middleare  yay")
-    next();
-}
+const { createOrUpdateUser,currentUser } = require("../controllers/auth");
 
 router.post("/create-or-update-user",authCheck,createOrUpdateUser);
-
-router.get("/testing",myMiddleWare,(req,res) => {
-    res.json({
-        data: "You SUCCESSFULLY TRIED MIDDLEWARE",
-    })
-})
+router.post("/current-user",authCheck,currentUser);
 
 module.exports = router;
